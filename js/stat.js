@@ -35,40 +35,35 @@ window.renderStatistics = function (ctx, names, times) {
   }
 
   function getColorColumn(name) {
-    if (name === 'Вы') {
-      return 'rgba(255, 0, 0, 1)';
-    } else {
-      return 'blue';
-    }
+    return name === 'Вы' ? 'rgba(255, 0, 0, 1)' :
+      'blue';
   }
 
   function getOpacityColumn(name) {
-    if (name === 'Вы') {
-      return 1;
-    } else {
-      return getRandom(0.1, 1);
-    }
+    return name === 'Вы' ? 1 : getRandom(0.1, 1);
+
   }
 
+  var barWidth = 40; // px; 
+  var indent = 90; // px;
+  var windowHeight = 300; // px;
+  var initialX = 165; // px;
+  // px;
+  var lineHeight = 15; // px;
+
   for (var i = 0; i < names.length; i++) {
-    for (i = 0; i < times.length; i++) {
-      var barWidth = 40; // px; 
-      var indent = 50; // px;
-      var windowHeight = 300; // px;
-      var initialX = 200; // px;
-      var initialY = windowHeight - 50 - (times[i] * step); // px;
-      var lineHeight = 15; // px;
+    var initialY = windowHeight - 50 - (times[i] * step);
 
-      ctx.fillStyle = getColorColumn(names[i]);
-      ctx.globalAlpha = getOpacityColumn(names[i]);
+    ctx.fillStyle = getColorColumn(names[i]);
+    ctx.globalAlpha = getOpacityColumn(names[i]);
 
-      ctx.fillRect(initialX + indent * i, initialY, barWidth, times[i] * step);
+    ctx.fillRect(initialX + indent * i, initialY, barWidth, times[i] * step);
 
-      ctx.fillStyle = '#000000';
-      ctx.globalAlpha = 1;
+    ctx.fillStyle = '#000000';
+    ctx.globalAlpha = 1;
 
-      ctx.fillText(names[i], initialX + indent * i, windowHeight - lineHeight * 2);
-      ctx.fillText(Math.round(times[i]), initialX + indent * i, initialY - lineHeight);
-    }
+    ctx.fillText(names[i], initialX + indent * i, windowHeight - lineHeight * 2);
+    ctx.fillText(Math.round(times[i]), initialX + indent * i, initialY - lineHeight);
+
   }
 };
