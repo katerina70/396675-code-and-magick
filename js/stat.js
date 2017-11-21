@@ -30,22 +30,28 @@ window.renderStatistics = function (ctx, names, times) {
   var histogramWidth = 150;
   var step = histogramWidth / (max - 0);
 
-  function getOpacityColumn(min, maxi) {
+  function getRandom(min, maxi) {
     return Math.random() * (maxi - min) + min;
   }
 
+  function getColorColumn(name) {
+    if (name === 'Вы') {
+      return 'rgba(255, 0, 0, 1)';
+    } else {
+      return 'blue';
+    }
+  }
+
+  function getOpacityColumn(name) {
+    if (name === 'Вы') {
+      return 1;
+    } else {
+      return getRandom(0.1, 1);
+    }
+  }
+
   for (var i = 0; i < names.length; i++) {
-
     for (i = 0; i < times.length; i++) {
-      var colorColumn = 'blue';
-
-
-      var opacityColumn = getOpacityColumn(0.1, 1);
-
-      if (names[i] === 'Вы') {
-        colorColumn = 'rgba(255, 0, 0, 1)';
-        opacityColumn = 1;
-      }
       var barWidth = 40; // px; 
       var indent = 50; // px;
       var windowHeight = 300; // px;
@@ -53,8 +59,8 @@ window.renderStatistics = function (ctx, names, times) {
       var initialY = windowHeight - 50 - (times[i] * step); // px;
       var lineHeight = 15; // px;
 
-      ctx.fillStyle = colorColumn;
-      ctx.globalAlpha = opacityColumn;
+      ctx.fillStyle = getColorColumn(names[i]);
+      ctx.globalAlpha = getOpacityColumn(names[i]);
 
       ctx.fillRect(initialX + indent * i, initialY, barWidth, times[i] * step);
 
@@ -63,9 +69,6 @@ window.renderStatistics = function (ctx, names, times) {
 
       ctx.fillText(names[i], initialX + indent * i, windowHeight - lineHeight * 2);
       ctx.fillText(Math.round(times[i]), initialX + indent * i, initialY - lineHeight);
-
     }
   }
-
-
 };
