@@ -35,24 +35,21 @@ window.renderStatistics = function (ctx, names, times) {
   }
 
   function getColorColumn(name) {
-    return name === 'Вы' ? 'rgba(255, 0, 0, 1)' :
-      'blue';
+    return name === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'blue';
   }
 
   function getOpacityColumn(name) {
     return name === 'Вы' ? 1 : getRandom(0.1, 1);
-
   }
 
   var barWidth = 40; // px; 
   var indent = 90; // px;
   var windowHeight = 300; // px;
   var initialX = 165; // px;
-  // px;
   var lineHeight = 15; // px;
 
   for (var i = 0; i < names.length; i++) {
-    var initialY = windowHeight - 50 - (times[i] * step);
+    var initialY = windowHeight - 50 - (times[i] * step); // px;
 
     ctx.fillStyle = getColorColumn(names[i]);
     ctx.globalAlpha = getOpacityColumn(names[i]);
