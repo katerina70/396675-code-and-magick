@@ -19,19 +19,22 @@ var getRandom = function (n) {
   return Math.floor(Math.random() * n);
 };
 
-var getWizardProperties = function (name, surname, coat, eyes) {
-  var wizard = {
-    name: wizardNames[getRandom(name)] + ' ' + wizardSurnames[getRandom(surname)],
-    coatColor: coatColors[getRandom(coat)],
-    eyesColor: eyesColors[getRandom(eyes)]
+var getArrayIndex = function (array) {
+  return getRandom(array.length);
+};
+
+var getWizardProperties = function () {
+  return {
+    name: wizardNames[getArrayIndex(wizardNames)] + ' ' + wizardSurnames[getArrayIndex(wizardSurnames)],
+    coatColor: coatColors[getArrayIndex(coatColors)],
+    eyesColor: eyesColors[getArrayIndex(eyesColors)]
   };
-  return wizard;
 };
 
 var wizards = [];
 
 for (var j = 1; j <= 4; j++) {
-  wizards.push(getWizardProperties(wizardNames.length, wizardSurnames.length, coatColors.length, eyesColors.length));
+  wizards.push(getWizardProperties());
 }
 
 var renderWizard = function (wizard) {
