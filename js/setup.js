@@ -18,16 +18,16 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template').c
 var getRandom = function (n) {
   return Math.floor(Math.random() * n);
 };
-
-var getArrayIndex = function (array) {
-  return getRandom(array.length);
+var getArrayItem = function (array) {
+  return array[getRandom(array.length)];
 };
+
 
 var getWizardProperties = function () {
   return {
-    name: wizardNames[getArrayIndex(wizardNames)] + ' ' + wizardSurnames[getArrayIndex(wizardSurnames)],
-    coatColor: coatColors[getArrayIndex(coatColors)],
-    eyesColor: eyesColors[getArrayIndex(eyesColors)]
+    name: getArrayItem(wizardNames) + ' ' + getArrayItem(wizardSurnames),
+    coatColor: getArrayItem(coatColors),
+    eyesColor: getArrayItem(eyesColors)
   };
 };
 
